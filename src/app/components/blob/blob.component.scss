@@ -1,0 +1,18 @@
+.blob-container {
+	position: relative;
+}
+
+.blob-blur {
+	width: 50vmax;
+	height: 50vmax;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	backdrop-filter: blur(8px);
+	-webkit-backdrop-filter: blur(8px);
+	pointer-events: none;
+}
+
+#blobCanvas {
+}
