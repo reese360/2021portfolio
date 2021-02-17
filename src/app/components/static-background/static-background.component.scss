@@ -1,0 +1,114 @@
+@import "src/scss/variables";
+
+.static-container {
+	height: 100vh;
+	width: 100vw;
+	overflow: hidden;
+	// background: $main-background-color;
+	// background: linear-gradient(90deg, rgba(34, 34, 34, 1) 0%, rgba(255, 254, 254, 1) 50%, rgba(34, 34, 34, 1) 100%);
+}
+
+.static {
+	position: absolute;
+	pointer-events: none;
+	-webkit-animation: static-animation 2500ms steps(4) infinite;
+	animation: static-animation 2500ms steps(4) infinite;
+	background-image: url("/assets/images/static_dark.png");
+	height: 300%;
+	left: -50%;
+	top: -50%;
+	width: 200%;
+}
+
+@-webkit-keyframes static-animation {
+	0% {
+		-webkit-transform: translate(0, 0);
+		transform: translate(0, 0);
+	}
+	10% {
+		-webkit-transform: translate(-5%, -5%);
+		transform: translate(-5%, -5%);
+	}
+	20% {
+		-webkit-transform: translate(-10%, 5%);
+		transform: translate(-10%, 5%);
+	}
+	30% {
+		-webkit-transform: translate(5%, -10%);
+		transform: translate(5%, -10%);
+	}
+	40% {
+		-webkit-transform: translate(-5%, 15%);
+		transform: translate(-5%, 15%);
+	}
+	50% {
+		-webkit-transform: translate(-10%, 5%);
+		transform: translate(-10%, 5%);
+	}
+	60% {
+		-webkit-transform: translate(15%, 0);
+		transform: translate(15%, 0);
+	}
+	70% {
+		-webkit-transform: translate(0, 10%);
+		transform: translate(0, 10%);
+	}
+	80% {
+		-webkit-transform: translate(-15%, 0);
+		transform: translate(-15%, 0);
+	}
+	90% {
+		-webkit-transform: translate(10%, 5%);
+		transform: translate(10%, 5%);
+	}
+	to {
+		-webkit-transform: translate(5%, 0);
+		transform: translate(5%, 0);
+	}
+}
+@keyframes static-animation {
+	0% {
+		-webkit-transform: translate(0, 0);
+		transform: translate(0, 0);
+	}
+	10% {
+		-webkit-transform: translate(-5%, -5%);
+		transform: translate(-5%, -5%);
+	}
+	20% {
+		-webkit-transform: translate(-10%, 5%);
+		transform: translate(-10%, 5%);
+	}
+	30% {
+		-webkit-transform: translate(5%, -10%);
+		transform: translate(5%, -10%);
+	}
+	40% {
+		-webkit-transform: translate(-5%, 15%);
+		transform: translate(-5%, 15%);
+	}
+	50% {
+		-webkit-transform: translate(-10%, 5%);
+		transform: translate(-10%, 5%);
+	}
+	60% {
+		-webkit-transform: translate(15%, 0);
+		transform: translate(15%, 0);
+	}
+	70% {
+		-webkit-transform: translate(0, 10%);
+		transform: translate(0, 10%);
+	}
+	80% {
+		-webkit-transform: translate(-15%, 0);
+		transform: translate(-15%, 0);
+	}
+	90% {
+		-webkit-transform: translate(10%, 5%);
+		transform: translate(10%, 5%);
+	}
+	to {
+		-webkit-transform: translate(5%, 0);
+		transform: translate(5%, 0);
+	}
+}

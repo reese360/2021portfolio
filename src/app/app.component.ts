@@ -1,10 +1,15 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+	selector: 'app-root',
+	templateUrl: './app.component.html',
+	styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  title = 'portfolio0216';
+	@ViewChild('cursor') cursorBlock!: ElementRef;
+
+	@HostListener('document:mousemove', ['$event']) onMouseMove(e: MouseEvent) {
+		this.cursorBlock.nativeElement.style.left = `${e.clientX - 5}px`;
+		this.cursorBlock.nativeElement.style.top = `${e.clientY - 5}px`;
+	}
 }

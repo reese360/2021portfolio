@@ -1,0 +1,26 @@
+@import "src/scss/variables";
+
+.static-background {
+	position: fixed;
+	pointer-events: none;
+
+	z-index: 50; // static at middle z-index
+}
+
+.view-container {
+	background: $main-background-color;
+	height: 100vh;
+	width: 100vw;
+}
+
+.cursor {
+	stroke: $theme-color;
+	fill: none;
+	stroke-width: 1.5px;
+	position: fixed;
+	width: 10px;
+	height: 10px;
+	z-index: 9999;
+	pointer-events: none;
+	user-select: none;
+}
