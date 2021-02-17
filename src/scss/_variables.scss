@@ -1,0 +1,29 @@
+// font families
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@100;200;400&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=PT+Sans&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Anton&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Fira+Sans:wght@300;400;500;700&display=swap");
+
+// font families for building dynamic classes
+$fonts: (
+	"anton": "Anton",
+	"fira": "Fira Sans",
+	"jetbrains": "JetBrains Mono",
+	"montserrat": "Montserrat",
+	"ptsans": "PT Sans",
+	"roboto": "Roboto",
+	"ubuntu": "Ubuntu",
+);
+
+// color variables
+$main-background-color: #dfdfdf;
+// $main-background-color: #2b2b2b;
+$text-color: #2b2b2b;
+// $text-color: #dfdfdf;
+$theme-color: #fa4361;
+
+// cubic bezier timing function
+$cubic-bezier-timing: cubic-bezier(0.86, 0, 0.07, 1);

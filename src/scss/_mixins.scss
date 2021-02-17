@@ -1,0 +1,16 @@
+@import "variables";
+
+@mixin slider($dir, $duration: 1000ms, $delay: 0ms, $timing: $cubic-bezier-timing) {
+	animation-duration: $duration;
+	animation-delay: $delay;
+	animation-fill-mode: both;
+	animation-timing-function: $timing;
+
+	@if $dir == up {
+		animation-name: slideUpAnimation;
+	} @else if $dir == down {
+		animation-name: slideDownAnimation;
+	} @else {
+		@error "Unknown Animation";
+	}
+}

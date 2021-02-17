@@ -1,0 +1,97 @@
+@import "variables";
+@import "animations";
+@import "mixins";
+
+* {
+	margin: 0;
+	padding: 0;
+}
+
+html {
+	height: 100vh;
+	width: 100vw;
+	// cursor: none;
+	color: $text-color;
+
+	::-moz-selection {
+		color: $theme-color;
+	}
+
+	::selection {
+		color: $theme-color;
+	}
+}
+
+body {
+	overflow-x: hidden;
+}
+
+.view {
+	width: 100vw;
+	height: 100vh;
+}
+
+// dynamically build font + sizing classes
+@each $font, $fontValue in $fonts {
+	@for $i from 10 through 160 {
+		$val: null;
+		@if $i % 2 == 0 {
+			$val: $i;
+		}
+
+		@if $val not null {
+			.#{$font}-#{$val} {
+				font-family: $fontValue;
+				font-size: #{$val}px;
+			}
+		}
+	}
+}
+
+.text-clip {
+	clip-path: polygon(0 0, 100% 0%, 100% 100%, 0% 100%);
+	// outline: 1px dotted red;
+	padding-right: 1%;
+	width: 100%;
+}
+
+// semantic classes
+.headline {
+	line-height: 140px;
+	font-weight: 500;
+	user-select: none;
+}
+
+.outline {
+	-webkit-text-stroke: 1px $text-color;
+	-webkit-text-fill-color: #00000000;
+}
+
+// animation classes
+.slide-up {
+	@include slider(up, 750ms, 0ms);
+}
+
+.slide-down {
+	@include slider(down, 750ms, 0ms);
+}
+
+/* #region scroll bar styling */
+//width
+::-webkit-scrollbar {
+	width: 4px;
+}
+
+//track
+::-webkit-scrollbar-track {
+	background: $main-background-color;
+}
+
+//handle
+::-webkit-scrollbar-thumb {
+	background: $theme-color;
+	&:hover {
+		background: $theme-color;
+	}
+}
+/*#endregion */
