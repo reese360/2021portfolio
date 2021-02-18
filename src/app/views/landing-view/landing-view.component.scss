@@ -19,9 +19,10 @@
 
 #header-1 {
 	margin-left: -50px;
+
 	@for $i from 1 to 9 {
 		:nth-child(#{$i}) {
-			@include slider(down, 750ms, #{($i * 50)}ms, cubic-bezier(0.5, 0.59, 0.07, 1));
+			@include slider(up, 750ms, #{($i * 20)}ms, cubic-bezier(0.5, 0.59, 0.07, 1));
 		}
 	}
 }
@@ -31,18 +32,11 @@
 	white-space: nowrap;
 	@for $i from 1 to 13 {
 		:nth-child(#{$i}) {
-			@include slider(up, 750ms, #{($i * 50) + 300}ms, cubic-bezier(0.5, 0.59, 0.07, 1));
+			@include slider(down, 750ms, #{($i * 20) + 100}ms, cubic-bezier(0.5, 0.59, 0.07, 1));
 		}
 	}
 }
 
 .header-letter {
 	display: inline-block;
-}
-
-.blob-bg {
-	// position: absolute;
-	// top: 50%;
-	// left: 50%;
-	// transform: translate(-50%, -50%);
 }

@@ -8,6 +8,7 @@ import { AfterViewInit, Component, ElementRef, HostListener, OnInit, ViewChild }
 export class BlobControllerComponent implements AfterViewInit {
 	blob!: Blob;
 	hover: boolean = false;
+	hoverTimer: number = 0;
 	previousMousePoint = { x: 0, y: 0 };
 	canvas!: HTMLCanvasElement;
 
@@ -19,28 +20,71 @@ export class BlobControllerComponent implements AfterViewInit {
 		this.onWindowResize(); // set canvas dimensions
 
 		this.blob = new Blob(this.canvas);
+
+		// if no mouseover for > 2 seconds => random movements
+		setInterval(() => {
+			this.hoverTimer++; // increment hoverTimer every second
+
+			if (this.hoverTimer > 2) {
+				// random entry vector
+				let angle = Math.random() * Math.PI * 2; // random angle
+				let x = Math.cos(angle) * this.blob.radius + this.blob.center.x;
+				let y = Math.sin(angle) * this.blob.radius + this.blob.center.y;
+				this.transformBlob({ x: x, y: y });
+
+				// random exit vector
+				angle = Math.random() * Math.PI * 2; // random angle
+				x = Math.cos(angle) * this.blob.radius + this.blob.center.x;
+				y = Math.sin(angle) * this.blob.radius + this.blob.center.y;
+				this.transformBlob({ x, y });
+			}
+		}, 1000);
 	}
 
-	@HostListener('window:resize', ['$event']) onWindowResize() {
+	@HostListener('window:focus', ['$event']) onFocus(event: any): void {
+		console.log('focus');
+	}
+
+	@HostListener('window:blur', ['$event']) onBlur(event: any): void {
+		console.log('blur');
+	}
+
+	@HostListener('window:resize', ['$event']) onWindowResize(): void {
 		this.canvas.width = window.innerWidth;
 		this.canvas.height = window.innerHeight;
 	}
 
-	@HostListener('document:mousemove', ['$event']) onMouseMove(e: MouseEvent) {
-		let pos = this.blob.center;
-		let diff = { x: e.clientX - pos.x, y: e.clientY - pos.y };
-		let dist = Math.sqrt(diff.x * diff.x + diff.y * diff.y);
-		let angle: number | null = null;
-		this.blob.mousePos = { x: pos.x - e.clientX, y: pos.y - e.clientY };
+	// @HostListener('document:mousedown', ['$event']) onMouseDown(e: MouseEvent): void {
+	// 	console.log('mouse:', e.clientX, e.clientY);
+	// 	let angle = Math.random() * Math.PI * 2; // random angle
+	// 	let x = Math.cos(angle) * this.blob.radius + this.blob.center.x;
+	// 	let y = Math.sin(angle) * this.blob.radius + this.blob.center.y;
+	// 	console.log(x, y);
+	// 	this.transformBlob({ x: x, y: y });
+	// }
 
-		if (dist < this.blob.radius && this.hover === false) {
-			let vector = { x: e.clientX - pos.x, y: e.clientY - pos.y };
+	@HostListener('document:mousemove', ['$event']) onMouseMove(e: MouseEvent): void {
+		this.transformBlob({ x: e.clientX, y: e.clientY });
+	}
+
+	transformBlob(e: { x: number; y: number }): void {
+		let pos = this.blob.center;
+		let diff = { x: e.x - pos.x, y: e.y - pos.y };
+		let dist = Math.round(Math.sqrt(diff.x * diff.x + diff.y * diff.y));
+		let angle: number | null = null;
+		this.blob.mousePos = { x: pos.x - e.x, y: pos.y - e.y };
+
+		if (dist <= this.blob.radius && this.hover === false) {
+			// entry vector
+			let vector = { x: e.x - pos.x, y: e.y - pos.y };
 			angle = Math.atan2(vector.y, vector.x);
 			this.hover = true;
-		} else if (dist > this.blob.radius && this.hover === true) {
-			let vector = { x: e.clientX - pos.x, y: e.clientY - pos.y };
+		} else if (dist >= this.blob.radius && this.hover === true) {
+			// exit vector
+			let vector = { x: e.x - pos.x, y: e.y - pos.y };
 			angle = Math.atan2(vector.y, vector.x);
 			this.hover = false;
+			this.hoverTimer = 0; // restart timer at 0
 		}
 
 		if (angle) {
@@ -55,13 +99,13 @@ export class BlobControllerComponent implements AfterViewInit {
 			});
 
 			if (nearestPoint) {
-				let strength = { x: this.previousMousePoint.x - e.clientX, y: this.previousMousePoint.y - e.clientY };
-				let strengthRay = Math.sqrt(strength.x * strength.x + strength.y * strength.y) * 10;
+				let strength = { x: this.previousMousePoint.x - e.x, y: this.previousMousePoint.y - e.y };
+				let strengthRay = Math.sqrt(strength.x * strength.x + strength.y * strength.y) * 20;
 				if (strengthRay > 100) strengthRay = 100;
 				nearestPoint!.acceleration = (strengthRay / 100) * (this.hover ? -1 : 1);
 			}
 		}
-		this.previousMousePoint = { x: e.clientX, y: e.clientY };
+		this.previousMousePoint = { x: e.x, y: e.y };
 	}
 }
 
@@ -71,18 +115,18 @@ class Blob {
 	numPoints: number = 26;
 	divisional: number = (Math.PI * 2) / this.numPoints;
 	radius: number = 200;
-	color: string = '#fa4361';
+	color: string = '#ff1053';
+	// color: CanvasGradient;
 
 	mousePos: { x: number; y: number } = { x: 0, y: 0 };
 
-	get center() {
-		return { x: this.canvas.width * this.position.x, y: this.canvas.height * this.position.y };
-	}
-
 	private position: { x: number; y: number } = { x: 0.5, y: 0.5 };
-
 	private canvas: HTMLCanvasElement;
 	private context: CanvasRenderingContext2D;
+
+	public get center() {
+		return { x: this.canvas.width * this.position.x, y: this.canvas.height * this.position.y };
+	}
 
 	constructor(canvas: HTMLCanvasElement) {
 		this.points = [];
@@ -93,6 +137,10 @@ class Blob {
 			const point = new Point(this.divisional * (i + 1), this);
 			this.points.push(point);
 		}
+
+		// this.color = this.context.createRadialGradient(0, 0, 50, 50, 50, 200);
+		// this.color.addColorStop(0, '#8ED6FF');
+		// this.color.addColorStop(1, '#004CB3');
 
 		this.render();
 	}
