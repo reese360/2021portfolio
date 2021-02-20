@@ -1,16 +1,23 @@
 @import "src/scss/variables";
 
-.static-background {
+#static-background {
 	position: fixed;
 	pointer-events: none;
-
 	z-index: 50; // static at middle z-index
 }
 
+#blob {
+	position: fixed;
+	z-index: 0;
+}
+
 .view-container {
-	background: $main-background-color;
-	height: 100vh;
-	width: 100vw;
+	// background: $main-background-color;
+	background: var(--main-background-color);
+	// height: 100vh;
+	// width: 100vw;
+	// overflow: hidden;
+	z-index: 1;
 }
 
 .cursor {
@@ -23,4 +30,8 @@
 	z-index: 9999;
 	pointer-events: none;
 	user-select: none;
+}
+
+.test {
+	z-index: 99999;
 }

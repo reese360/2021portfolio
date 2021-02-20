@@ -1,6 +1,6 @@
 @import "src/scss/variables";
 
-@keyframes slideDownAnimation {
+@keyframes enterDownAnimation {
 	0% {
 		transform: translateY(-100%);
 	}
@@ -9,11 +9,29 @@
 	}
 }
 
-@keyframes slideUpAnimation {
+@keyframes exitDownAnimation {
+	0% {
+		transform: translateY(0%);
+	}
+	100% {
+		transform: translateY(-100%);
+	}
+}
+
+@keyframes enterUpAnimation {
 	0% {
 		transform: translateY(100%);
 	}
 	100% {
 		transform: translateY(0%);
+	}
+}
+
+@keyframes exitUpAnimation {
+	0% {
+		transform: translateY(0%);
+	}
+	100% {
+		transform: translateY(100%);
 	}
 }

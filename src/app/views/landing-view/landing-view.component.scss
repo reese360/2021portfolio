@@ -2,40 +2,110 @@
 @import "src/scss/mixins";
 
 .portfolio {
-	transform: rotate(-90deg);
+	writing-mode: tb-rl;
+	transform: rotate(-180deg) translateY(50%);
 	width: fit-content;
 	position: absolute;
 	top: 50%;
+	left: 2%;
 }
 
-.title {
+.titles {
 	position: absolute;
-	top: 40%;
+	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
 
 	z-index: 51;
 }
 
-#header-1 {
-	margin-left: -50px;
-
-	@for $i from 1 to 9 {
-		:nth-child(#{$i}) {
-			@include slider(up, 750ms, #{($i * 20)}ms, cubic-bezier(0.5, 0.59, 0.07, 1));
-		}
-	}
+.anim-fwd {
+	animation-direction: normal;
 }
 
-#header-2 {
-	margin-left: 50px;
+.anim-bwd {
+	animation-direction: reverse;
+}
+
+.text-enter {
 	white-space: nowrap;
-	@for $i from 1 to 13 {
+	@for $i from 1 to 50 {
 		:nth-child(#{$i}) {
-			@include slider(down, 750ms, #{($i * 20) + 100}ms, cubic-bezier(0.5, 0.59, 0.07, 1));
+			$duration: random(750) + 250 + ms;
+			$delay: random(600) + ms;
+			$dir: random(2);
+			@if $dir == 1 {
+				@include sliderEnter(up, $duration, $delay, cubic-bezier(0.5, 0.59, 0.07, 1));
+			} @else {
+				@include sliderEnter(down, $duration, $delay, cubic-bezier(0.5, 0.59, 0.07, 1));
+			}
 		}
 	}
 }
+
+.text-exit {
+	white-space: nowrap;
+	@for $i from 1 to 50 {
+		:nth-child(#{$i}) {
+			$duration: random(750) + 250 + ms;
+			$delay: random(250) + ms;
+			$dir: random(2);
+			@if $dir == 1 {
+				@include sliderExit(up, $duration, -0, cubic-bezier(0.5, 0.59, 0.07, 1));
+			} @else {
+				@include sliderExit(down, $duration, $delay, cubic-bezier(0.5, 0.59, 0.07, 1));
+			}
+		}
+	}
+}
+
+// #header-0 {
+// 	white-space: nowrap;
+// 	@for $i from 1 to 13 {
+// 		:nth-child(#{$i}) {
+// 			$duration: random(750) + 250 + ms;
+// 			$delay: random(600) + ms;
+// 			$dir: random(2);
+// 			@if $dir == 1 {
+// 				@include slider(up, $duration, $delay, cubic-bezier(0.5, 0.59, 0.07, 1));
+// 			} @else {
+// 				@include slider(down, $duration, $delay, cubic-bezier(0.5, 0.59, 0.07, 1));
+// 			}
+// 			// @include slider(up, 750ms, #{($i * 20)}ms, cubic-bezier(0.5, 0.59, 0.07, 1));
+// 		}
+// 	}
+// }
+// #header-2 {
+// 	white-space: nowrap;
+// 	@for $i from 1 to 15 {
+// 		:nth-child(#{$i}) {
+// 			$duration: random(750) + 250 + ms;
+// 			$delay: random(600) + ms;
+// 			$dir: random(2);
+// 			@if $dir == 1 {
+// 				@include slider(up, $duration, $delay, cubic-bezier(0.5, 0.59, 0.07, 1));
+// 			} @else {
+// 				@include slider(down, $duration, $delay, cubic-bezier(0.5, 0.59, 0.07, 1));
+// 			}
+// 		}
+// 	}
+// }
+
+// #header-1 {
+// 	white-space: nowrap;
+// 	@for $i from 1 to 15 {
+// 		:nth-child(#{$i}) {
+// 			$duration: random(750) + 350 + ms;
+// 			$delay: random(600) + ms;
+// 			$dir: random(2);
+// 			@if $dir == 1 {
+// 				@include slider(up, $duration, $delay, cubic-bezier(0.5, 0.59, 0.07, 1));
+// 			} @else {
+// 				@include slider(down, $duration, $delay, cubic-bezier(0.5, 0.59, 0.07, 1));
+// 			}
+// 		}
+// 	}
+// }
 
 .header-letter {
 	display: inline-block;

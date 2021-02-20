@@ -26,14 +26,27 @@ body {
 	overflow-x: hidden;
 }
 
+:root {
+	--theme-color: #{$theme-color};
+	--main-background-color: #{$main-background-color};
+}
+
+.js-loading *,
+.js-loading *:before,
+.js-loading *:after {
+	animation-play-state: paused !important;
+}
+
 .view {
 	width: 100vw;
 	height: 100vh;
+	// overflow-x: hidden;
+	overflow: hidden;
 }
 
 // dynamically build font + sizing classes
 @each $font, $fontValue in $fonts {
-	@for $i from 10 through 160 {
+	@for $i from 10 through 200 {
 		$val: null;
 		@if $i % 2 == 0 {
 			$val: $i;
@@ -66,15 +79,6 @@ body {
 .outline {
 	-webkit-text-stroke: 1px $text-color;
 	-webkit-text-fill-color: #00000000;
-}
-
-// animation classes
-.slide-up {
-	@include slider(up, 750ms, 0ms);
-}
-
-.slide-down {
-	@include slider(down, 750ms, 0ms);
 }
 
 /* #region scroll bar styling */

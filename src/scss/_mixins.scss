@@ -1,15 +1,30 @@
 @import "variables";
 
-@mixin slider($dir, $duration: 1000ms, $delay: 0ms, $timing: $cubic-bezier-timing) {
+@mixin sliderEnter($dir, $duration: 1000ms, $delay: 0ms, $timing: $cubic-bezier-timing) {
 	animation-duration: $duration;
 	animation-delay: $delay;
 	animation-fill-mode: both;
 	animation-timing-function: $timing;
 
 	@if $dir == up {
-		animation-name: slideUpAnimation;
+		animation-name: enterUpAnimation;
 	} @else if $dir == down {
-		animation-name: slideDownAnimation;
+		animation-name: enterDownAnimation;
+	} @else {
+		@error "Unknown Animation";
+	}
+}
+
+@mixin sliderExit($dir, $duration: 1000ms, $delay: 0ms, $timing: $cubic-bezier-timing) {
+	animation-duration: $duration;
+	animation-delay: $delay;
+	animation-fill-mode: both;
+	animation-timing-function: $timing;
+
+	@if $dir == up {
+		animation-name: exitUpAnimation;
+	} @else if $dir == down {
+		animation-name: exitDownAnimation;
 	} @else {
 		@error "Unknown Animation";
 	}
