@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { StaticBackgroundComponent } from './components/static-background/static-background.component';
 import { LandingViewComponent } from './views/landing-view/landing-view.component';
-import { BlobControllerComponent } from './components/blob/blob.component';
+import { BlobControllerComponent } from './components/blobController/blobController.component';
 @NgModule({
 	declarations: [AppComponent, StaticBackgroundComponent, LandingViewComponent, BlobControllerComponent],
 	imports: [BrowserModule, AppRoutingModule],
