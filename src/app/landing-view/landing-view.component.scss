@@ -1,0 +1,206 @@
+@import "src/scss/variables";
+@import "src/scss/mixins";
+@import "src/scss/animations";
+
+.view {
+}
+
+.portfolio {
+	writing-mode: tb-rl;
+	transform: rotate(-180deg) translateY(50%);
+	width: fit-content;
+	position: absolute;
+	top: 50%;
+	left: 2%;
+	z-index: 50;
+}
+
+.top {
+	user-select: none;
+	text-align: left;
+}
+
+.bottom {
+	text-align: right;
+	user-select: none;
+}
+
+.rp {
+	position: absolute;
+	left: 10%;
+	top: 1%;
+	z-index: 50;
+	padding: 5px;
+	user-select: none;
+	cursor: pointer;
+	font-weight: 700;
+
+	.plus {
+		color: var(--theme-color);
+	}
+}
+
+.nav-links {
+	position: absolute;
+	right: 10%;
+	top: 1%;
+	// display: grid;
+	// grid-template-columns: repeat(4, 1.25fr);
+	// grid-gap: 10px;
+	z-index: 50;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: row;
+
+	> * {
+		padding: 0 8px;
+	}
+}
+
+.widget {
+	z-index: 50;
+	position: absolute;
+	bottom: 20px;
+	left: 10vw;
+	text-align: left;
+	line-height: 15px;
+	user-select: none;
+}
+
+.scroll-icon {
+	z-index: 50;
+	position: absolute;
+	bottom: 10px;
+	left: 50%;
+	transform: translateX(-50%);
+	text-align: center;
+	cursor: pointer;
+
+	&:hover {
+		.scroll-text {
+			opacity: 100%;
+		}
+	}
+}
+
+.scroll-arrow {
+	stroke: var(--text-color);
+	fill: none;
+	transition: stroke $theme-timer $cubic-bezier-timing;
+}
+
+.scroll-text {
+	opacity: 0;
+	margin-top: -10px;
+	transition: color $theme-timer $cubic-bezier-timing, opacity $theme-timer ease-in-out;
+}
+
+.titles {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	text-transform: capitalize;
+	z-index: 50;
+}
+
+// .anim-fwd {
+// 	animation-direction: normal;
+// }
+
+// .anim-bwd {
+// 	animation-direction: reverse;
+// }
+
+.text-enter-0 {
+	white-space: nowrap;
+	@for $i from 1 to 14 {
+		:nth-child(#{$i}) {
+			$duration: random(750) + 250 + ms;
+			$delay: random(600) + ms;
+			$dir: random(2);
+			@if $dir == 1 {
+				@include sliderEnter(up, $duration, $delay, cubic-bezier(0.5, 0.59, 0.07, 1));
+			} @else {
+				@include sliderEnter(down, $duration, $delay, cubic-bezier(0.5, 0.59, 0.07, 1));
+			}
+		}
+	}
+}
+
+.text-enter-1 {
+	white-space: nowrap;
+	@for $i from 1 to 9 {
+		:nth-child(#{$i}) {
+			$duration: random(750) + 250 + ms;
+			$delay: random(600) + ms;
+			$dir: random(2);
+			@if $dir == 1 {
+				@include sliderEnter(up, $duration, $delay, cubic-bezier(0.5, 0.59, 0.07, 1));
+			} @else {
+				@include sliderEnter(down, $duration, $delay, cubic-bezier(0.5, 0.59, 0.07, 1));
+			}
+		}
+	}
+}
+.text-enter-2 {
+	white-space: nowrap;
+	@for $i from 1 to 9 {
+		:nth-child(#{$i}) {
+			$duration: random(750) + 250 + ms;
+			$delay: random(600) + ms;
+			$dir: random(2);
+			@if $dir == 1 {
+				@include sliderEnter(up, $duration, $delay, cubic-bezier(0.5, 0.59, 0.07, 1));
+			} @else {
+				@include sliderEnter(down, $duration, $delay, cubic-bezier(0.5, 0.59, 0.07, 1));
+			}
+		}
+	}
+}
+.text-enter-3 {
+	white-space: nowrap;
+	@for $i from 1 to 20 {
+		:nth-child(#{$i}) {
+			$duration: random(750) + 250 + ms;
+			$delay: random(600) + ms;
+			$dir: random(2);
+			@if $dir == 1 {
+				@include sliderEnter(up, $duration, $delay, cubic-bezier(0.5, 0.59, 0.07, 1));
+			} @else {
+				@include sliderEnter(down, $duration, $delay, cubic-bezier(0.5, 0.59, 0.07, 1));
+			}
+		}
+	}
+}
+
+.text-exit {
+	white-space: nowrap;
+	// @for $i from 1 to 50 {
+	// 	:nth-child(#{$i}) {
+	// 		$duration: random(750) + 250 + ms;
+	// 		$delay: random(250) + ms;
+	// 		$dir: random(2);
+	// 		@if $dir == 1 {
+	// 			@include sliderExit(up, $duration, -0, cubic-bezier(0.5, 0.59, 0.07, 1));
+	// 		} @else {
+	// 			@include sliderExit(down, $duration, $delay, cubic-bezier(0.5, 0.59, 0.07, 1));
+	// 		}
+	// 	}
+	// }
+
+	.text-clip {
+		.header-letter {
+			animation-name: exitUpAnimation;
+			animation-timing-function: $cubic-bezier-timing;
+			animation-play-state: paused;
+			// animation-delay: calc(var(--scroll) * -1s);
+			animation-delay: 0s;
+		}
+	}
+}
+
+.header-letter {
+	display: inline-block;
+}
