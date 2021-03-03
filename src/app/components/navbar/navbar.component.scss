@@ -1,0 +1,35 @@
+.navbar-container {
+	width: 100vw;
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	z-index: 50;
+	user-select: none;
+	margin-top: 1%;
+}
+
+.nav-links {
+	z-index: 50;
+	margin-right: 10vw;
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	flex-direction: row;
+	> * {
+		padding: 0 10px;
+	}
+}
+
+.logo {
+	margin-left: 10vw;
+	z-index: 50;
+	font-weight: 700;
+}
+
+.rp {
+	width: fit-content;
+	cursor: pointer;
+	letter-spacing: normal;
+	.plus {
+		color: var(--theme-color);
+	}
+}

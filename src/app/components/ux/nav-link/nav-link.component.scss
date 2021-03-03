@@ -1,0 +1,58 @@
+@import "src/scss/variables";
+
+.link-container {
+	height: fit-content;
+	width: fit-content;
+	outline-offset: -1px;
+	position: relative;
+	cursor: pointer;
+}
+
+.display-text {
+	text-transform: uppercase;
+	// text-transform: capitalize;
+	line-height: 20px;
+	user-select: none;
+}
+.block {
+	height: 22px;
+	width: 100%;
+	background: var(--text-color);
+	// background: var(--theme-color);
+	position: absolute;
+	top: 0;
+	left: -105%;
+	z-index: 51;
+
+	animation-timing-function: $cubic-bezier-timing;
+	animation-fill-mode: forwards;
+}
+
+.block-enter {
+	animation-name: blockEnter;
+	animation-duration: 250ms;
+}
+
+.block-exit {
+	animation-name: blockExit;
+	animation-duration: 500ms;
+}
+
+@keyframes blockEnter {
+	0% {
+		left: -105%;
+	}
+
+	100% {
+		left: 0%;
+	}
+}
+
+@keyframes blockExit {
+	0% {
+		left: 0%;
+	}
+	100% {
+		left: 105%;
+	}
+}
