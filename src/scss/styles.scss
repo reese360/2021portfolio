@@ -11,7 +11,7 @@ html {
 	height: 100vh;
 	width: 100vw;
 	// cursor: none;
-	color: $text-color;
+	color: var(--text-color);
 
 	::-moz-selection {
 		color: $theme-color;
@@ -20,15 +20,19 @@ html {
 	::selection {
 		color: $theme-color;
 	}
+
+	transition: color $theme-timer $cubic-bezier-timing;
 }
 
 body {
 	overflow-x: hidden;
+	overflow-y: overlay;
 }
 
 :root {
 	--theme-color: #{$theme-color};
 	--main-background-color: #{$main-background-color};
+	--text-color: #{$text-color};
 }
 
 .js-loading *,
@@ -70,15 +74,16 @@ body {
 
 // semantic classes
 .headline {
-	line-height: 140px;
-	font-weight: 500;
+	line-height: 170px;
+	// font-weight: 600;
 	user-select: none;
-	word-wrap: none;
 }
 
 .outline {
-	-webkit-text-stroke: 1px $text-color;
+	-webkit-text-stroke: 1px var(--text-color);
+	// -webkit-text-stroke: 1px $text-color;
 	-webkit-text-fill-color: #00000000;
+	transition: -webkit-text-stroke 1000ms $cubic-bezier-timing;
 }
 
 /* #region scroll bar styling */
@@ -89,14 +94,13 @@ body {
 
 //track
 ::-webkit-scrollbar-track {
-	background: $main-background-color;
+	// background: $main-background-color;
+	// background: transparent;
 }
 
 //handle
 ::-webkit-scrollbar-thumb {
-	background: $theme-color;
-	&:hover {
-		background: $theme-color;
-	}
+	background: var(--theme-color);
+	transition: all 1000ms $cubic-bezier-timing;
 }
 /*#endregion */
