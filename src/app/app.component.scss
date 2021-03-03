@@ -3,12 +3,21 @@
 #static-background {
 	position: fixed;
 	pointer-events: none;
-	z-index: 50; // static at middle z-index
+	z-index: 1; // static at middle z-index
 }
 
 #blob {
 	position: fixed;
+	top: 0;
+	left: 0;
 	z-index: 0;
+}
+
+#navbar {
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 50;
 }
 
 .view-container {
@@ -17,21 +26,48 @@
 	// height: 100vh;
 	// width: 100vw;
 	// overflow: hidden;
-	z-index: 1;
+	z-index: 50;
+
+	transition: background $theme-timer $cubic-bezier-timing;
 }
 
 .cursor {
-	stroke: $theme-color;
+	$hover-transition: 100ms;
+	stroke: var(--text-color);
+	stroke-dasharray: 0;
 	fill: none;
 	stroke-width: 1.5px;
-	position: fixed;
+	position: absolute;
 	width: 10px;
 	height: 10px;
 	z-index: 9999;
 	pointer-events: none;
-	user-select: none;
+	// transition: left 0ms, right 0ms, stroke 100ms linear, fill $hover-transition ease, width $hover-transition ease,
+	// 	height $hover-transition ease;
+	// transition: height 50ms ease-in, width 50ms ease-in;
 }
 
-.test {
-	z-index: 99999;
+.cursor-hl {
+	stroke: var(--theme-color);
+	stroke-dasharray: 1.25;
+	animation: rotateCursor 2500ms linear infinite;
+	width: 30px;
+	height: 30px;
+}
+
+@keyframes rotateCursor {
+	from {
+		-ms-transform: rotate(0deg);
+		-moz-transform: rotate(0deg);
+		-webkit-transform: rotate(0deg);
+		-o-transform: rotate(0deg);
+		transform: rotate(0deg);
+	}
+	to {
+		-ms-transform: rotate(360deg);
+		-moz-transform: rotate(360deg);
+		-webkit-transform: rotate(360deg);
+		-o-transform: rotate(360deg);
+		transform: rotate(360deg);
+	}
 }
