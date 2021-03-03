@@ -5,15 +5,9 @@ export class Blob {
 	numPoints: number = 26;
 	divisional: number = (Math.PI * 2) / this.numPoints;
 	color: string = getComputedStyle(document.documentElement).getPropertyValue('--theme-color');
-
 	targetRadius: number = this.radius; // target value for radius to adjust to
-
 	step: number = 1; // step for increasing or decreasing blob radius;
-
 	mousePos: { x: number; y: number } = { x: 0, y: 0 };
-
-	requestFrame: boolean = true;
-
 	private position: { x: number; y: number } = { x: 0.5, y: 0.5 };
 	private canvas: HTMLCanvasElement;
 	private context: CanvasRenderingContext2D;

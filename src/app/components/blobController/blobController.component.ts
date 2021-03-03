@@ -2,6 +2,14 @@ import { AfterViewInit, Component, ElementRef, HostListener, OnInit, ViewChild }
 import { Blob } from '../../models/blob.model';
 import { Point } from '../../models/point.model';
 
+enum BlobPosition {
+	TOP = 0,
+	BOTTOM = 2,
+	LEFT = 3,
+	RIGHT = 4,
+	CENTER = 5,
+}
+
 @Component({
 	selector: 'app-blobController',
 	templateUrl: './blobController.component.html',
@@ -9,14 +17,19 @@ import { Point } from '../../models/point.model';
 })
 export class BlobControllerComponent implements AfterViewInit {
 	blob!: Blob;
-	blobRadius: number = 300;
+	// blobRadius: number = 350;
+	blobRadius: number = window.innerHeight / 2.5;
 	hover: boolean = false;
 	hoverTimer: number = 0;
 	lastMousePoint = { x: 0, y: 0 };
 	canvas!: HTMLCanvasElement;
 	inFocus: boolean = true;
 
-	constructor() {}
+	blobPosition: BlobPosition;
+
+	constructor() {
+		this.blobPosition = BlobPosition.CENTER;
+	}
 
 	ngAfterViewInit(): void {
 		this.canvas = document.getElementById('blobCanvas') as HTMLCanvasElement;
@@ -30,7 +43,7 @@ export class BlobControllerComponent implements AfterViewInit {
 			this.hoverTimer++; // increment hoverTimer every second
 
 			// if (this.hoverTimer > 3 && this.inFocus) {
-			if (this.hoverTimer > 3) {
+			if (this.hoverTimer > 2) {
 				// if (this.hoverTimer > 1 && this.blob.requestFrame) {
 				// random entry vector
 				let angle = Math.random() * Math.PI * 2; // random angle
@@ -44,7 +57,7 @@ export class BlobControllerComponent implements AfterViewInit {
 				y = Math.sin(angle) * this.blob.radius + this.blob.center.y;
 				this.animateBlob({ x, y });
 
-				this.hoverTimer = 0;
+				// this.hoverTimer = 0;
 			}
 		}, 1000);
 	}
@@ -85,7 +98,7 @@ export class BlobControllerComponent implements AfterViewInit {
 			let vector = { x: e.x - pos.x, y: e.y - pos.y };
 			angle = Math.atan2(vector.y, vector.x);
 			this.hover = false;
-			this.hoverTimer = 0; // restart timer at 0
+			// this.hoverTimer = 0; // restart timer at 0
 		}
 
 		if (angle) {
