@@ -1,0 +1,28 @@
+.arrow-container {
+	position: relative;
+}
+
+.text {
+	position: absolute;
+	top: 50%;
+	transform: translate(0, -50%);
+	cursor: pointer;
+	user-select: none;
+}
+
+.svg-arrow {
+	transform: rotate(90deg);
+	pointer-events: none;
+	svg {
+		stroke: var(--text-color);
+
+		circle {
+			stroke-width: 1;
+			fill: none;
+		}
+
+		line {
+			stroke-width: 2.5;
+		}
+	}
+}

@@ -11,8 +11,9 @@ import { NavLinkComponent } from './components/ux/nav-link/nav-link.component';
 import { ThemerComponent } from './components/ux/themer/themer.component';
 import { AboutViewComponent } from './views/about-view/about-view.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { ArrowComponent } from './components/ux/arrow/arrow.component';
 @NgModule({
-	declarations: [AppComponent, StaticBackgroundComponent, LandingViewComponent, BlobControllerComponent, NavLinkComponent, ThemerComponent, AboutViewComponent, NavbarComponent],
+	declarations: [AppComponent, StaticBackgroundComponent, LandingViewComponent, BlobControllerComponent, NavLinkComponent, ThemerComponent, AboutViewComponent, NavbarComponent, ArrowComponent],
 	imports: [BrowserModule, AppRoutingModule, HttpClientModule],
 	providers: [],
 	bootstrap: [AppComponent],

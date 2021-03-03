@@ -18,7 +18,7 @@ enum BlobPosition {
 export class BlobControllerComponent implements AfterViewInit {
 	blob!: Blob;
 	// blobRadius: number = 350;
-	blobRadius: number = window.innerHeight / 2.5;
+	blobRadius: number = Math.round(window.innerHeight / 2.5);
 	hover: boolean = false;
 	hoverTimer: number = 0;
 	lastMousePoint = { x: 0, y: 0 };
@@ -32,6 +32,7 @@ export class BlobControllerComponent implements AfterViewInit {
 	}
 
 	ngAfterViewInit(): void {
+		console.log(this.blobRadius);
 		this.canvas = document.getElementById('blobCanvas') as HTMLCanvasElement;
 		this.canvas.setAttribute('touch-action', 'none');
 		this.onWindowResize(); // set canvas dimensions
